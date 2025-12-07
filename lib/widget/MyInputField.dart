@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../utils/theme_colors.dart';  // for inputFormatters
 
 class CustomInput extends StatefulWidget {
   final TextEditingController controller;
@@ -7,6 +10,8 @@ class CustomInput extends StatefulWidget {
   final IconData? suffixIcon;
   final bool isPassword;
   final Function(String)? onChanged;
+  final TextInputType? keyboardType;               // add this
+  final List<TextInputFormatter>? inputFormatters; // and this
 
   const CustomInput({
     Key? key,
@@ -16,6 +21,8 @@ class CustomInput extends StatefulWidget {
     this.suffixIcon,
     this.isPassword = false,
     this.onChanged,
+    this.keyboardType,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -45,8 +52,20 @@ class _CustomInputState extends State<CustomInput> {
       controller: widget.controller,
       obscureText: _obscureText,
       onChanged: widget.onChanged,
+      keyboardType: widget.keyboardType,
+      inputFormatters: widget.inputFormatters,
+      style: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
+      ),
       decoration: InputDecoration(
         hintText: widget.hintText,
+        hintStyle: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          color: Colors.grey,
+        ),
         prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
         suffixIcon: widget.isPassword
             ? IconButton(
@@ -56,12 +75,21 @@ class _CustomInputState extends State<CustomInput> {
           onPressed: _togglePasswordVisibility,
         )
             : (widget.suffixIcon != null ? Icon(widget.suffixIcon) : null),
-        border: OutlineInputBorder(
+
+        // Main color borders
+        enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: ThemeColors.primary),
         ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: ThemeColors.primary, width: 2),
+        ),
+
         contentPadding:
         const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
       ),
+
     );
   }
 }

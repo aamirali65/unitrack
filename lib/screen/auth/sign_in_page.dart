@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:unitrack/widget/MyInputField.dart'; // your custom input
 import 'package:unitrack/utils/theme_colors.dart';
+import 'package:unitrack/widget/MyText.dart';
 
 import '../../widget/MyButton.dart';
 
@@ -32,17 +35,14 @@ class _SignInPageState extends State<SignInPage> {
             SizedBox(
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.35,
-              child: Image.asset(
-                "assets/images/login.png",
-                fit: BoxFit.cover,
-              ),
+              child: Image.asset("assets/images/login.png", fit: BoxFit.cover),
             ),
 
             // Card below image with padding top, left, right
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
+                  padding: const EdgeInsets.fromLTRB(16, 40, 16, 0),
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -53,11 +53,22 @@ class _SignInPageState extends State<SignInPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
+                          CustomText(
+                            text: "UniTrack - Portal App",
+                            textAlign: TextAlign.center,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: ThemeColors.primary,
+                          ),
+                          const SizedBox(height: 16),
                           // Enrollment input
                           CustomInput(
                             controller: enrollmentController,
                             hintText: 'Enter Enrollment',
                             prefixIcon: Icons.person,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
                           ),
 
                           const SizedBox(height: 16),
@@ -76,7 +87,7 @@ class _SignInPageState extends State<SignInPage> {
                           CustomButton(
                             text: 'Login',
                             onPressed: () {
-                              // Handle login
+                              context.go('/student/dashboard');
                             },
                           ),
 
@@ -88,31 +99,28 @@ class _SignInPageState extends State<SignInPage> {
                             children: [
                               TextButton(
                                 onPressed: () {
-                                  // Navigate to forget password page
+                                  // Navigate to register page
+                                  Navigator.pushNamed(context, '/register');
                                 },
-                                child: const Text(
-                                  'Forget Password?',
-                                  style: TextStyle(
-                                    color: ThemeColors.primary,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                child: const CustomText(
+                                  text: 'Register New Account',
+
+                                  fontSize: 14,
                                 ),
                               ),
                               TextButton(
                                 onPressed: () {
-                                  // Navigate to register page
-                                  Navigator.pushNamed(context, '/register');
+                                  // Navigate to forget password page
                                 },
-                                child: const Text(
-                                  'Register New Account',
-                                  style: TextStyle(
-                                    color: ThemeColors.primary,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                child: const CustomText(
+                                  text: 'Forget Password?',
+
+                                  fontSize: 14,
                                 ),
                               ),
                             ],
                           ),
+
                         ],
                       ),
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomText extends StatelessWidget {
   final String text;
@@ -21,7 +22,7 @@ class CustomText extends StatelessWidget {
     return Text(
       text,
       textAlign: textAlign,
-      style: TextStyle(
+      style: GoogleFonts.poppins(
         fontSize: fontSize,
         fontWeight: fontWeight,
         color: color ?? Colors.black,
