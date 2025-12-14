@@ -14,10 +14,18 @@ import 'package:unitrack/screen/student/pages/student_syllabus.dart';
 import 'package:unitrack/screen/student/pages/student_timetable.dart';
 import 'package:unitrack/screen/student/pages/student_exam.dart';
 import 'package:unitrack/screen/student/pages/student_profile.dart';
-import 'package:unitrack/screen/student/pages/student_settings.dart';
+import 'package:unitrack/screen/settingsPage.dart';
 import 'package:unitrack/screen/student/pages/student_fees.dart';
 
 // Teacher Screens
+import 'package:unitrack/screen/teacher/pages/teacher_assignment.dart';
+import 'package:unitrack/screen/teacher/pages/teacher_attendence.dart';
+import 'package:unitrack/screen/teacher/pages/teacher_course.dart';
+import 'package:unitrack/screen/teacher/pages/teacher_lecture.dart';
+import 'package:unitrack/screen/teacher/pages/teacher_profile.dart';
+import 'package:unitrack/screen/teacher/pages/teacher_result.dart';
+import 'package:unitrack/screen/teacher/pages/teacher_studentlist.dart';
+import 'package:unitrack/screen/teacher/pages/teacher_timetable.dart';
 import 'package:unitrack/screen/teacher/teacher_dashboard.dart';
 
 
@@ -35,7 +43,11 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '/register',
-      builder: (context, state) => const SignUpPage(),
+      builder: (context, state) => const RegisterPage(),
+    ),
+    GoRoute(
+      path: '/settings',
+      builder: (context, state) => const StudentSettingsPage(),
     ),
 
     // ------------------ STUDENT ROUTES ------------------
@@ -75,48 +87,48 @@ final GoRouter router = GoRouter(
       path: '/student/profile',
       builder: (context, state) => const StudentProfilePage(),
     ),
-    GoRoute(
-      path: '/student/settings',
-      builder: (context, state) => const StudentSettingsPage(),
-    ),
 
     // ------------------ TEACHER ROUTES ------------------
     GoRoute(
       path: '/teacher/dashboard',
       builder: (context, state) => const TeacherDashboard(),
     ),
-    // GoRoute(
-    //   path: '/teacher/today-lecture',
-    //   builder: (context, state) => const TeacherTodayLecturePage(),
-    // ),
-    // GoRoute(
-    //   path: '/teacher/attendance',
-    //   builder: (context, state) => const TeacherAttendancePage(),
-    // ),
-    // GoRoute(
-    //   path: '/teacher/syllabus',
-    //   builder: (context, state) => const TeacherSyllabusPage(),
-    // ),
-    // GoRoute(
-    //   path: '/teacher/timetable',
-    //   builder: (context, state) => const TeacherTimetablePage(),
-    // ),
-    // GoRoute(
-    //   path: '/teacher/exams',
-    //   builder: (context, state) => const TeacherExamsPage(),
-    // ),
-    // GoRoute(
-    //   path: '/teacher/results',
-    //   builder: (context, state) => const TeacherResultsPage(),
-    // ),
-    // GoRoute(
-    //   path: '/teacher/fees',
-    //   builder: (context, state) => const TeacherFeesPage(),
-    // ),
-    // GoRoute(
-    //   path: '/teacher/profile',
-    //   builder: (context, state) => const TeacherProfilePage(),
-    // ),
+    GoRoute(
+      path: '/teacher/course',
+      builder: (context, state) => const TeacherMyCoursesPage(),
+    ),
+    GoRoute(
+      path: '/teacher/lecture',
+      builder: (context, state) => const TeacherLecturePage(),
+    ),
+    GoRoute(
+      path: '/teacher/assignment',
+      builder: (context, state) => const TeacherAssignmentPage(),
+    ),
+    GoRoute(
+      path: '/teacher/attendance',
+      builder: (context, state) => const TeacherAttendancePage(),
+    ),
+    GoRoute(
+      path: '/teacher/timetable',
+      builder: (context, state) => const TeacherTimeTablePage(),
+    ),
+    GoRoute(
+      path: '/teacher/settings',
+      builder: (context, state) => const StudentSettingsPage(),
+    ),
+    GoRoute(
+      path: '/teacher/studentlist',
+      builder: (context, state) => const TeacherStudentlist(),
+    ),
+    GoRoute(
+      path: '/teacher/results',
+      builder: (context, state) => const TeacherUploadResultPage(),
+    ),
+    GoRoute(
+      path: '/teacher/profile',
+      builder: (context, state) => const TeacherProfilePage(),
+    ),
     // GoRoute(
     //   path: '/teacher/settings',
     //   builder: (context, state) => const TeacherSettingsPage(),

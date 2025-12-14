@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:unitrack/widget/MyText.dart';
 import '../../../utils/theme_colors.dart';
 
-class StudentProfilePage extends StatefulWidget {
-  const StudentProfilePage({super.key});
+class TeacherProfilePage extends StatefulWidget {
+  const TeacherProfilePage({super.key});
 
   @override
-  State<StudentProfilePage> createState() => _StudentProfilePageState();
+  State<TeacherProfilePage> createState() => _TeacherProfilePageState();
 }
 
-class _StudentProfilePageState extends State<StudentProfilePage> {
+class _TeacherProfilePageState extends State<TeacherProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,13 +45,13 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                     radius: 48,
                     backgroundColor: Colors.white,
                     backgroundImage: NetworkImage(
-                      "https://i.ibb.co/4fShG3W/user.png", // temp image
+                      "https://i.ibb.co/4fShG3W/user.png", // you can replace with teacher pic
                     ),
                   ),
                   const SizedBox(height: 14),
 
                   const CustomText(
-                    text: "Aamir Ali",
+                    text: "Dr. Aamir Ali",
                     fontSize: 20,
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
@@ -59,7 +59,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                   const SizedBox(height: 6),
 
                   CustomText(
-                    text: "BCS/BS 3 A - 2412170",
+                    text: "Computer Science Department",
                     color: Colors.white.withOpacity(0.9),
                     fontSize: 15,
                   ),
@@ -69,41 +69,39 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
 
             const SizedBox(height: 20),
 
-            // ---------- DETAILS CARD ----------
+            // ---------- PERSONAL INFO ----------
             _buildInfoCard(
               title: "Personal Information",
               items: [
-                _infoTile("Full Name", "Aamir Ali"),
-                _infoTile("Email", "aamir@example.com"),
+                _infoTile("Full Name", "Dr. Aamir Ali"),
+                _infoTile("Email", "aamir.teacher@example.com"),
                 _infoTile("Phone", "+92 300 1234567"),
-                _infoTile("Student ID", "2412170"),
-                _infoTile("Program", "BS Computer Science"),
-                _infoTile("Section", "BSCS-3A"),
-                _infoTile("Batch", "Fall 2025"),
+                _infoTile("Employee ID", "T-2412170"),
+                _infoTile("Department", "Computer Science"),
               ],
             ),
 
             const SizedBox(height: 20),
 
-            // ---------- LOGIN DETAILS ----------
+            // ---------- ACCOUNT DETAILS ----------
             _buildInfoCard(
               title: "Account Details",
               items: [
-                _infoTile("Username", "aamir_almani"),
-                _infoTile("Registered Email", "aamir@example.com"),
+                _infoTile("Username", "aamir_teacher"),
+                _infoTile("Registered Email", "aamir.teacher@example.com"),
                 _infoTile("Password", "********"),
               ],
             ),
 
             const SizedBox(height: 20),
 
-            // ---------- ACADEMIC SUMMARY ----------
+            // ---------- PROFESSIONAL SUMMARY ----------
             _buildInfoCard(
-              title: "Academic Summary",
+              title: "Professional Summary",
               items: [
-                _infoTile("Current Semester", "3rd Semester"),
-                _infoTile("Total Credit Hours", "90"),
-                _infoTile("CGPA", "3.25"),
+                _infoTile("Designation", "Assistant Professor"),
+                _infoTile("Experience", "5 years"),
+                _infoTile("Courses Handling", "Data Structures, Algorithms, Operating Systems"),
                 _infoTile("Status", "Active"),
               ],
             ),

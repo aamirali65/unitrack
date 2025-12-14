@@ -172,7 +172,7 @@ class _StudentSyllabusPageState extends State<StudentSyllabusPage> {
                               ),
                             ),
                             child: const Text(
-                              "Show",
+                              "Download PDF",
                               style: TextStyle(color: Colors.white),
                             ),
                           ),

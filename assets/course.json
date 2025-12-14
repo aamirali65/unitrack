@@ -1,0 +1,8 @@
+{
+  "Semester 1": ["Math Basics", "Intro to CS", "English"],
+  "Semester 2": ["Data Structures", "Physics", "Chemistry"],
+  "Semester 3": ["Discrete Math", "OOP", "Database Systems"],
+  "Semester 4": ["Algorithms", "Operating Systems", "Networks"],
+  "Semester 5": ["Software Engineering", "AI", "Web Development"],
+  "Semester 6": ["Mobile Dev", "Cloud Computing", "Machine Learning"]
+}

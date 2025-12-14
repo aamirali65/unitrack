@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../utils/theme_colors.dart';  // for inputFormatters
 
@@ -22,7 +23,7 @@ class CustomInput extends StatefulWidget {
     this.isPassword = false,
     this.onChanged,
     this.keyboardType,
-    this.inputFormatters,
+    this.inputFormatters, MaterialColor? borderColor,
   }) : super(key: key);
 
   @override
@@ -54,7 +55,7 @@ class _CustomInputState extends State<CustomInput> {
       onChanged: widget.onChanged,
       keyboardType: widget.keyboardType,
       inputFormatters: widget.inputFormatters,
-      style: const TextStyle(
+      style: GoogleFonts.poppins(
         fontSize: 16,
         fontWeight: FontWeight.w400,
         color: Colors.black,
@@ -70,7 +71,7 @@ class _CustomInputState extends State<CustomInput> {
         suffixIcon: widget.isPassword
             ? IconButton(
           icon: Icon(
-            _obscureText ? Icons.visibility_off : Icons.visibility,
+            _obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
           ),
           onPressed: _togglePasswordVisibility,
         )
