@@ -7,6 +7,9 @@ import 'package:unitrack/widget/MyInputField.dart';
 import 'package:unitrack/utils/theme_colors.dart';
 import 'package:unitrack/widget/MyText.dart';
 import '../../widget/MyButton.dart';
+import '../../Models/signup_model.dart';
+import '../../DSA/Signup_manager.dart';
+
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -16,6 +19,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final StudentManager managerObj = StudentManager();
+
   final TextEditingController enrollmentController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
@@ -35,6 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
     enrollmentController.addListener(validateEnrollment);
     passwordController.addListener(validatePassword);
     fullNameController.addListener(validateFullName);
+
   }
 
   void validateEnrollment() {
@@ -98,6 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
+
   Future<void> registerUser() async {
     validateEnrollment();
     validatePassword();
@@ -144,6 +151,19 @@ class _RegisterPageState extends State<RegisterPage> {
         'created_at': DateTime.now().toIso8601String(),
         'avatar_url': null,
       });
+
+      void onSignup() async{
+        if(role == "student") {
+          final fromSignupPageToModel = SignupModel(id: enrollment,
+              name: fullName,
+              semester: "not assigned",
+              course: "not assigned");
+          managerObj.addStudent(fromSignupPageToModel);
+          await managerObj.saveStudents();
+        }
+      }
+
+
 
       if (!mounted) return;
 

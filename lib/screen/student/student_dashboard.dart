@@ -130,7 +130,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Welcome, $userName",
+                          "Welcome, Ahmed Mughal",
                           style: const TextStyle(
                             fontSize: 26,
                             color: Colors.white,
@@ -143,7 +143,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                           style: const TextStyle(color: Colors.white70, fontSize: 15),
                         ),
                         Text(
-                          "Student ID: $studentId",
+                          "Student ID: 2412133",
                           style: const TextStyle(color: Colors.white70, fontSize: 15),
                         ),
                       ],
@@ -160,11 +160,17 @@ class _StudentDashboardState extends State<StudentDashboard> {
                       mainAxisSpacing: 12,
                       childAspectRatio: 0.85,
                       children: [
+                        // DashboardCard(
+                        //   title: "Today Lecture",
+                        //   icon: Icons.play_lesson_outlined,
+                        //   color: Colors.blue,
+                        //   onTap: () => context.push("/student/today-lecture"),
+                        // ),
                         DashboardCard(
-                          title: "Today Lecture",
-                          icon: Icons.play_lesson_outlined,
-                          color: Colors.blue,
-                          onTap: () => context.push("/student/today-lecture"),
+                          title: "Time Table",
+                          icon: Icons.schedule_outlined,
+                          color: Colors.red,
+                          onTap: () => context.push("/student/timetable"),
                         ),
                         DashboardCard(
                           title: "Attendance",
@@ -178,17 +184,18 @@ class _StudentDashboardState extends State<StudentDashboard> {
                           color: Colors.orange,
                           onTap: () => context.push("/student/syllabus"),
                         ),
+
+                        // DashboardCard(
+                        //   title: "Exams",
+                        //   icon: Icons.library_books_outlined,
+                        //   color: Colors.purple,
+                        //   onTap: () => context.push("/student/exams"),
+                        // ),
                         DashboardCard(
-                          title: "Time Table",
-                          icon: Icons.schedule_outlined,
-                          color: Colors.red,
-                          onTap: () => context.push("/student/timetable"),
-                        ),
-                        DashboardCard(
-                          title: "Exams",
-                          icon: Icons.library_books_outlined,
-                          color: Colors.purple,
-                          onTap: () => context.push("/student/exams"),
+                          title: "Fees",
+                          icon: Icons.payments_outlined,
+                          color: Colors.brown,
+                          onTap: () => context.push("/student/fees"),
                         ),
                         DashboardCard(
                           title: "Results",
@@ -196,12 +203,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                           color: Colors.indigo,
                           onTap: () => context.push("/student/results"),
                         ),
-                        DashboardCard(
-                          title: "Fees",
-                          icon: Icons.payments_outlined,
-                          color: Colors.brown,
-                          onTap: () => context.push("/student/fees"),
-                        ),
+
                         DashboardCard(
                           title: "Profile",
                           icon: Icons.person_outline,

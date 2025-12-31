@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       theme: appTheme,
       routerConfig: router,
       debugShowCheckedModeBanner: false,
+
     );
   }
 }
@@ -42,7 +43,7 @@ final ThemeData appTheme = ThemeData(
   ),
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: ThemeColors.primary,
-    background: ThemeColors.background,
-    onBackground: ThemeColors.text,
+    surface: ThemeColors.background,
+    onSurface: ThemeColors.text,
   ),
 );

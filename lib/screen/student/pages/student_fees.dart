@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:unitrack/widget/MyText.dart';
+// import '../../../DSA/Customized_Hashmap.dart';
 import '../../../utils/theme_colors.dart';
+// import '../../../DSA/Customized_Queue.dart';
 
 class StudentFeesPage extends StatefulWidget {
   const StudentFeesPage({super.key});
@@ -10,10 +12,19 @@ class StudentFeesPage extends StatefulWidget {
 }
 
 class _StudentFeesPageState extends State<StudentFeesPage> {
+
+  int _daysLeft(String? dueDate) {
+    if (dueDate == null) return 99999;
+    final due = DateTime.tryParse(dueDate);
+    if (due == null) return 99999;
+    final now = DateTime.now();
+    return due.difference(now).inDays;
+  }
+
   final List<Map<String, dynamic>> semesters = [
     {
       'semester': 'First Semester',
-      'isPaid': true,
+      'isPaid': false,
       'totalAmount': 20000,
       'paidAmount': 20000,
       'pendingAmount': 0,
@@ -22,12 +33,12 @@ class _StudentFeesPageState extends State<StudentFeesPage> {
       'receiptUrl': 'https://example.com/receipt1.pdf',
     },
     {
-      'semester': 'Second Semester',
+      'semester': 'Examination fee',
       'isPaid': false,
       'totalAmount': 22000,
       'paidAmount': 10000,
       'pendingAmount': 12000,
-      'paymentDate': '2024-12-01',
+      'paymentDate': '2026-12-01',
       'creditHours': 16,
       'receiptUrl': 'https://example.com/receipt2.pdf',
     },
@@ -37,58 +48,84 @@ class _StudentFeesPageState extends State<StudentFeesPage> {
       'totalAmount': 25000,
       'paidAmount': 0,
       'pendingAmount': 25000,
-      'paymentDate': null,
+      'paymentDate': '2026-01-03',
+      'creditHours': 18,
+      'receiptUrl': null,
+    },
+    {
+      'semester': 'Lab Charges',
+      'isPaid': false,
+      'totalAmount': 25000,
+      'paidAmount': 0,
+      'pendingAmount': 25000,
+      'paymentDate': '2026-01-02',
+      'creditHours': 18,
+      'receiptUrl': null,
+    },
+    {
+      'semester': 'Fourth Semester',
+      'isPaid': false,
+      'totalAmount': 25000,
+      'paidAmount': 0,
+      'pendingAmount': 25000,
+      'paymentDate': '2026-02-01',
+      'creditHours': 18,
+      'receiptUrl': null,
+    },
+    {
+      'semester': 'Fifth Semester',
+      'isPaid': false,
+      'totalAmount': 25000,
+      'paidAmount': 0,
+      'pendingAmount': 25000,
+      'paymentDate': '2026-10-01',
+      'creditHours': 18,
+      'receiptUrl': null,
+    },
+    {
+      'semester': 'Second Semester',
+      'isPaid': false,
+      'totalAmount': 25000,
+      'paidAmount': 0,
+      'pendingAmount': 25000,
+      'paymentDate': '2025-05-10',
       'creditHours': 18,
       'receiptUrl': null,
     },
   ];
 
-  late List<bool> _expanded;
+
+  List<Map<String, dynamic>> sortedFeeList = [];
 
   @override
   void initState() {
     super.initState();
-    // +1 for total fees card
-    _expanded = List.generate(semesters.length + 1, (index) => false);
+
+    sortedFeeList = List.from(semesters);
+    sortedFeeList.sort((a, b) {
+      int daysA = _daysLeft(a['paymentDate']);
+      int daysB = _daysLeft(b['paymentDate']);
+      return daysA.compareTo(daysB);
+    });
   }
 
-  void _downloadReceipt(String? url) {
-    if (url == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Receipt not available')),
-      );
-      return;
+  Color feecolor(String? date) {
+    int daysLeft = _daysLeft(date);
+    if (daysLeft < 0) {
+      return Colors.red.shade700;
+    } else if (daysLeft <= 4) {
+      return Colors.orange.shade300;
+    } else {
+      return Colors.green.shade700;
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Downloading receipt from $url')),
-    );
   }
 
-  // Calculate total fees from semesters
-  Map<String, double> _calculateTotalFees() {
-    double totalAmount = 0;
-    double paidAmount = 0;
-    double pendingAmount = 0;
-    double creditHours = 0;
 
-    for (var sem in semesters) {
-      totalAmount += (sem['totalAmount'] ?? 0);
-      paidAmount += (sem['paidAmount'] ?? 0);
-      pendingAmount += (sem['pendingAmount'] ?? 0);
-      creditHours += (sem['creditHours'] ?? 0);
-    }
-
-    return {
-      'totalAmount': totalAmount,
-      'paidAmount': paidAmount,
-      'pendingAmount': pendingAmount,
-      'creditHours': creditHours,
-    };
-  }
 
   @override
   Widget build(BuildContext context) {
-    final totalFees = _calculateTotalFees();
+    // We no longer need to call getQueueAsList() in the build method.
+    // final List<Map<String, dynamic>> feeList = getQueueAsList();
 
     return Scaffold(
       appBar: AppBar(
@@ -104,82 +141,14 @@ class _StudentFeesPageState extends State<StudentFeesPage> {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView.builder(
-          itemCount: semesters.length + 1,
-          itemBuilder: (context, index) {
-            // First card is total fees summary
-            if (index == 0) {
-              final isExpanded = _expanded[0];
-              return Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  side: BorderSide(
-                    color: ThemeColors.primary,
-                    width: 1.5,
-                  ),
-                ),
-                elevation: 4,
-                margin: const EdgeInsets.only(bottom: 16),
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: const CustomText(
-                        text: 'Total Fees Paid',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                        color: ThemeColors.primary,
-                      ),
-                      subtitle: CustomText(
-                        text: totalFees['pendingAmount'] == 0
-                            ? 'All Fees Paid'
-                            : 'Fees Pending',
-                        fontWeight: FontWeight.w600,
-                        color: ThemeColors.primary,
-                      ),
-                      trailing: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            _expanded[0] = !isExpanded;
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: ThemeColors.primary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          minimumSize: const Size(70, 36),
-                        ),
-                        child: CustomText(
-                          text: isExpanded ? 'Hide' : 'Show',
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    if (isExpanded)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _buildRow('Total Amount', 'PKR ${totalFees['totalAmount']}'),
-                            _buildRow('Paid Amount', 'PKR ${totalFees['paidAmount']}'),
-                            _buildRow('Pending Amount', 'PKR ${totalFees['pendingAmount']}'),
-                            _buildRow('Credit Hours', '${totalFees['creditHours']}'),
-                            const SizedBox(height: 12),
-                            // No receipt for total fees
-                          ],
-                        ),
-                      ),
-                  ],
-                ),
-              );
-            }
 
-            // Other cards for each semester
-            final sem = semesters[index - 1];
-            final isExpanded = _expanded[index];
+          itemCount: sortedFeeList.length,
+          itemBuilder: (context, index) {
+
+            final sem = sortedFeeList[index];
 
             return Card(
+              color: feecolor(sem['paymentDate']),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
                 side: BorderSide(
@@ -199,91 +168,24 @@ class _StudentFeesPageState extends State<StudentFeesPage> {
                       color: ThemeColors.primary,
                     ),
                     subtitle: CustomText(
-                      text: sem['pendingAmount'] == 0 ? 'Fees Paid' : 'Fees Pending',
+                      text: sem['pendingAmount'] == 0
+                          ? 'Fees Paid'
+                          : 'Fees Pending',
                       fontWeight: FontWeight.w600,
                       color: ThemeColors.primary,
                     ),
-                    trailing: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _expanded[index] = !isExpanded;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ThemeColors.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        minimumSize: const Size(70, 36),
-                      ),
-                      child: CustomText(
-                        text: isExpanded ? 'Hide' : 'Show',
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    trailing: CustomText(
+                      text: 'Due Date: ${sem['paymentDate'] ?? 'N/A'}',
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+
                     ),
                   ),
-                  if (isExpanded)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildRow('Total Amount', 'PKR ${sem['totalAmount']}'),
-                          _buildRow('Paid Amount', 'PKR ${sem['paidAmount']}'),
-                          _buildRow('Pending Amount', 'PKR ${sem['pendingAmount']}'),
-                          _buildRow('Payment Date', sem['paymentDate'] ?? 'N/A'),
-                          _buildRow('Credit Hours', '${sem['creditHours']}'),
-                          const SizedBox(height: 12),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: ElevatedButton.icon(
-                              onPressed: () => _downloadReceipt(sem['receiptUrl']),
-                              icon: const Icon(Icons.download),
-                              label: const CustomText(text: 'Download Receipt', color: Colors.white),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: ThemeColors.primary,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                 ],
               ),
             );
           },
         ),
-      ),
-    );
-  }
-
-  Widget _buildRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 3,
-            child: CustomText(
-              text: label,
-              fontWeight: FontWeight.w600,
-              color: ThemeColors.primary,
-              fontSize: 15,
-            ),
-          ),
-          Expanded(
-            flex: 4,
-            child: CustomText(
-              text: value,
-              fontWeight: FontWeight.w500,
-              fontSize: 15,
-            ),
-          ),
-        ],
       ),
     );
   }

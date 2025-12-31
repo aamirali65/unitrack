@@ -68,6 +68,10 @@ class _TeacherAttendancePageState extends State<TeacherAttendancePage> {
 
   @override
   Widget build(BuildContext context) {
+    print("Semester: $selectedSemester");
+    print("Course: $selectedCourse");
+    print(studentsBySemesterCourse[selectedSemester]);
+
     List<String> courses =
     selectedSemester != null ? coursesBySemester[selectedSemester!] ?? [] : [];
 

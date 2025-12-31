@@ -51,7 +51,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                   const SizedBox(height: 14),
 
                   const CustomText(
-                    text: "Aamir Ali",
+                    text: "Ahmed Mughal",
                     fontSize: 20,
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
@@ -59,7 +59,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                   const SizedBox(height: 6),
 
                   CustomText(
-                    text: "BCS/BS 3 A - 2412170",
+                    text: "BCS/BS 3 A - 2412133",
                     color: Colors.white.withOpacity(0.9),
                     fontSize: 15,
                   ),
@@ -73,10 +73,10 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
             _buildInfoCard(
               title: "Personal Information",
               items: [
-                _infoTile("Full Name", "Aamir Ali"),
-                _infoTile("Email", "aamir@example.com"),
-                _infoTile("Phone", "+92 300 1234567"),
-                _infoTile("Student ID", "2412170"),
+                _infoTile("Full Name", "Ahmed mughal"),
+                _infoTile("Email", "ahmed@example.com"),
+                _infoTile("Phone", "+92 334 2144567"),
+                _infoTile("Student ID", "2412133"),
                 _infoTile("Program", "BS Computer Science"),
                 _infoTile("Section", "BSCS-3A"),
                 _infoTile("Batch", "Fall 2025"),
@@ -89,8 +89,8 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
             _buildInfoCard(
               title: "Account Details",
               items: [
-                _infoTile("Username", "aamir_almani"),
-                _infoTile("Registered Email", "aamir@example.com"),
+                _infoTile("Username", "ahmed mughal"),
+                _infoTile("Registered Email", "ahmed@example.com"),
                 _infoTile("Password", "********"),
               ],
             ),
