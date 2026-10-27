@@ -64,7 +64,7 @@ Most DSA projects are done using Python scripts or JavaFX desktop apps. Unitrack
 
 ```bash
 # Clone the repository
-git clone https://github.com/aamirali65/Unitrack-EduPortalApp
+git clone https://github.com/aamirali65/unitrack
 
 # Navigate to the project directory
 cd unitrack
@@ -117,7 +117,7 @@ This makes Unitrack both a functional product and a practical demonstration that
 
 ## 🔗 Repository
 
-**GitHub:** (https://github.com/aamirali65/Unitrack-EduPortalApp/)
+**GitHub:** (https://github.com/aamirali65/unitrack/)
 
 > 🚧 This project is actively in development. Feedback and ideas are always welcome!
 
